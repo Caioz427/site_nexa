@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0f17">
+
+    <title>NEXA | Executive Panel</title>
+
+    <!-- Tipografia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="brand">
+                <div class="brand-logo">N</div>
+
+                <div>
+                    <h1>NEXA <span>/ EXECUTIVE PANEL</span></h1>
+                    <p>Luxury Fragrance Management</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+
+                <label class="exchange-control">Taxa de Câmbio (Kz/€)<input id="exchangeRate" type="number" min="0.000001" step="0.01" value="1360" aria-label="Taxa de câmbio Kz por euro"></label>
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    Sistema Operacional
+                </div>
+
+                <div class="backup-actions">
+                    <button type="button" id="exportBackupButton" class="btn btn-outline">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Exportar backup</span>
+                    </button>
+                    <button type="button" id="importBackupButton" class="btn btn-outline">
+                        <i class="fa-solid fa-upload"></i>
+                        <span>Importar backup</span>
+                    </button>
+                    <input type="file" id="backupFileInput" accept=".json,application/json" hidden>
+                </div>
+
+                <a href="#" id="sheetsButton" class="btn btn-outline">
+                    <i class="fa-brands fa-google-drive"></i>
+                    <span>Abrir Google Sheets</span>
+                </a>
+
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- INTRODUÇÃO -->
+        <section class="welcome-section">
+
+            <div>
+                <span class="section-label">GESTÃO EXECUTIVA</span>
+
+                <h2>Painel de Controlo</h2>
+
+                <p>
+                    Acompanha o desempenho financeiro e comercial da NEXA.
+                </p>
+            </div>
+
+            <div class="date-display">
+                <i class="fa-regular fa-calendar"></i>
+                <span id="currentDate"></span>
+            </div>
+
+        </section>
+
+
+        <!-- MÉTRICAS REAIS -->
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">01 / PERFORMANCE</span>
+                    <h3>Métricas Reais</h3>
+                    <p>Valores calculados automaticamente a partir das vendas.</p>
+                </div>
+
+                <span class="live-badge">
+                    <span></span> DADOS REAIS
+                </span>
+
+            </div>
+
+
+            <div class="kpi-grid">
+
+                <article class="kpi-card blue-card">
+
+                    <div class="kpi-top">
+                        <span>Total Faturado Real</span>
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <h2 id="realRevenue">0 Kz</h2>
+
+                    <p>Valor total das vendas registadas</p>
+
+                </article>
+
+
+                <article class="kpi-card green-card">
+
+                    <div class="kpi-top">
+                        <span>Lucro Líquido Real</span>
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+
+                    <h2 id="realProfit">0 Kz</h2>
+
+                    <p>Faturação menos custos dos produtos</p>
+
+                </article>
+
+
+                <article class="kpi-card gold-card">
+
+                    <div class="kpi-top">
+                        <span>Reinvestimento NEXA</span>
+                        <i class="fa-solid fa-rotate"></i>
+                    </div>
+
+                    <h2 id="realReinvestment">0 Kz</h2>
+
+                    <p>50% do lucro líquido</p>
+
+                </article>
+
+
+                <article class="kpi-card purple-card">
+
+                    <div class="kpi-top">
+                        <span>Proventos Pessoais</span>
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                    <h2 id="realPersonal">0 Kz</h2>
+
+                    <p>50% do lucro líquido</p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- MÉTRICAS PREVISTAS -->
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">02 / PLANEAMENTO</span>
+                    <h3>Metas e Previsões</h3>
+                    <p>Previsão calculada a partir do catálogo e das quantidades iniciais.</p>
+                </div>
+
+                <span class="forecast-badge">
+                    <i class="fa-solid fa-bullseye"></i>
+                    PREVISÃO DO CATÁLOGO
+                </span>
+
+            </div>
+
+
+            <div class="kpi-grid forecast-grid">
+
+                <article class="kpi-card forecast-card">
+
+                    <div class="kpi-top">
+                        <span>Faturação Prevista</span>
+                        <i class="fa-solid fa-money-bill-trend-up"></i>
+                    </div>
+
+                    <h2 id="forecastRevenue">435.500 Kz</h2>
+
+                    <p>Valor potencial de venda do stock inicial</p>
+
+                </article>
+
+
+                <article class="kpi-card forecast-card">
+
+                    <div class="kpi-top">
+                        <span>Investimento Total</span>
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+
+                    <h2 id="forecastInvestment">343.876 Kz</h2>
+
+                    <p>Custo total de aquisição do stock inicial</p>
+
+                </article>
+
+
+                <article class="kpi-card forecast-card">
+
+                    <div class="kpi-top">
+                        <span>Lucro Previsto</span>
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+
+                    <h2 id="forecastProfit">91.624 Kz</h2>
+
+                    <p>Margem potencial do stock inicial</p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- GRÁFICOS -->
+        <section class="dashboard-section" id="treasurySection">
+            <div class="section-heading"><div><span class="section-label">TESOURARIA / CICLO DE CAPITAL</span><h3>Painel de Tesouraria</h3><p>O caixa livre considera apenas pagamentos efetivamente recebidos.</p></div></div>
+            <div class="kpi-grid">
+                <article class="kpi-card blue-card"><div class="kpi-top"><span>Bruto Faturado</span><i class="fa-solid fa-cash-register"></i></div><h2 id="treasuryGross">0 Kz</h2><p>Vendas registadas</p></article>
+                <article class="kpi-card gold-card"><div class="kpi-top"><span>Reserva para Reposição</span><i class="fa-solid fa-boxes-stacked"></i></div><h2 id="capitalReserve">0 Kz</h2><p>Custo dos artigos vendidos</p></article>
+                <article class="kpi-card blue-card"><div class="kpi-top"><span>Caixa Livre</span><i class="fa-solid fa-wallet"></i></div><h2 id="freeCash">0 Kz</h2><p>Recebido menos reserva</p></article>
+                <article class="kpi-card green-card"><div class="kpi-top"><span>Lucro Líquido Real</span><i class="fa-solid fa-chart-line"></i></div><h2 id="treasuryProfit">0 Kz</h2><p>Inclui margens negativas</p></article>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">03 / ANALYTICS</span>
+                    <h3>Análise Financeira</h3>
+                    <p>Visualização do desempenho e distribuição dos resultados.</p>
+                </div>
+
+            </div>
+
+
+            <div class="charts-grid">
+
+                <article class="chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+                            <h4>Faturação e Investimento por Lote</h4>
+                            <p>Valores calculados a partir dos perfumes e vendas registados</p>
+                        </div>
+
+                        <i class="fa-solid fa-chart-area"></i>
+
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="lotChart"></canvas>
+                    </div>
+
+                </article>
+
+
+                <article class="chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+                            <h4>Divisão do Lucro Real</h4>
+                            <p>Distribuição dos resultados em 50/50</p>
+                        </div>
+
+                        <i class="fa-solid fa-chart-pie"></i>
+
+                    </div>
+
+                    <div class="donut-container">
+
+                        <div class="donut-chart-wrapper">
+                            <canvas id="profitChart"></canvas>
+
+                            <div class="donut-center">
+                                <strong id="donutProfit">0 Kz</strong>
+                                <span>Lucro Real</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="chart-legend">
+
+                        <div>
+                            <span class="legend-dot blue-dot"></span>
+                            <span>Reinvestimento</span>
+                            <strong id="legendReinvestment">0 Kz</strong>
+                        </div>
+
+                        <div>
+                            <span class="legend-dot green-dot"></span>
+                            <span>Proventos Pessoais</span>
+                            <strong id="legendPersonal">0 Kz</strong>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- GESTÃO DE LOTES, CATÁLOGO E STOCK -->
+        <section class="dashboard-section" id="catalogSection">
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">04 / INVENTÁRIO</span>
+                    <h3>Configuração de Lotes & Catálogo</h3>
+                    <p>Cria lotes, adiciona perfumes e acompanha o stock sem editar o código.</p>
+                </div>
+                <span class="live-badge"><span></span> STOCK AUTOMÁTICO</span>
+            </div>
+
+            <div class="catalog-panel">
+                <div class="catalog-tools">
+                    <div>
+                        <h4>Gestor de Lotes</h4>
+                        <p>Cria os lotes que vais utilizar na operação.</p>
+                    </div>
+                    <div class="inline-create-lot">
+                        <input type="text" id="newLotName" placeholder="Ex.: Lote 3" maxlength="50">
+                        <button class="btn btn-outline" id="addLotButton" type="button"><i class="fa-solid fa-plus"></i> Criar Lote</button>
+                    </div>
+                </div>
+                <div class="form-error catalog-error" id="lotError" role="alert"></div>
+                <div class="table-responsive">
+                    <table class="catalog-table">
+                        <thead><tr><th>Nome do Lote</th><th>Perfumes</th><th>Stock total</th><th>Ações</th></tr></thead>
+                        <tbody id="lotsTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="catalog-tools product-tools">
+                    <div>
+                        <h4>Adicionar Novo Perfume</h4>
+                        <p>Define o custo, preço planeado, lote e quantidade inicial.</p>
+                    </div>
+                    <span id="catalogCounter" class="catalog-counter">0 perfumes · 0 lotes</span>
+                </div>
+                <form id="productForm" class="product-form">
+                    <div class="form-grid catalog-form-grid">
+                        <div class="form-group full-width">
+                            <label for="productName">Nome do Perfume</label>
+                            <input type="text" id="productName" maxlength="100" placeholder="Ex.: Al Nashama Caprice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productCategory">Categoria</label>
+                            <select id="productCategory" required><option>Perfumes</option><option>Áudio/Colunas</option><option>Telemóveis</option><option>Laptops</option><option>Gaming/Peças PC</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productCost">Custo de Aquisição</label>
+                            <div class="currency-input"><input type="number" id="productCost" min="0" step="0.01" placeholder="Ex.: 40000" required><select id="productCostCurrency" aria-label="Moeda do custo"><option value="AOA">Kz</option><option value="EUR">€</option></select></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Preço de Venda Planeado (Kz)</label>
+                            <input type="number" id="productPrice" min="1" step="1" placeholder="Ex.: 60000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productQty">Quantidade Inicial</label>
+                            <input type="number" id="productQty" min="1" step="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productLot">Lote</label>
+                            <select id="productLot" required><option value="">Cria primeiro um lote</option></select>
+                        </div>
+                    </div>
+                    <div class="form-error" id="productError" role="alert"></div>
+                    <div class="catalog-form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Adicionar ao Catálogo</button>
+                    </div>
+                </form>
+
+                <div class="catalog-tools stock-tools">
+                    <div><h4>Catálogo e Stock Atual</h4><p>O stock diminui automaticamente após cada venda.</p></div>
+                </div>
+                <div class="table-responsive">
+                    <table class="catalog-table">
+                        <thead><tr><th>Produto</th><th>Categoria</th><th>Lote</th><th>Custo</th><th>Preço planeado</th><th>Stock</th><th>Estado</th><th>Ações</th></tr></thead>
+                        <tbody id="catalogTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- GESTÃO DE VENDAS -->
+        <section class="dashboard-section">
+
+            <div class="sales-panel">
+
+                <div class="sales-header">
+
+                    <div>
+                        <span class="section-label">05 / OPERAÇÃO COMERCIAL</span>
+                        <h3>Gestão de Vendas</h3>
+                        <p>Histórico de clientes, encomendas e pagamentos.</p>
+                    </div>
+
+                    <button class="btn btn-primary" id="openSaleModal">
+                        <i class="fa-solid fa-plus"></i>
+                        Registar Nova Venda
+                    </button>
+
+                </div>
+
+
+                <div class="table-tools">
+
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="search"
+                            id="searchSales"
+                            placeholder="Pesquisar cliente ou perfume..."
+                        >
+                    </div>
+
+                    <span id="salesCounter">0 vendas registadas</span>
+
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>N.º</th>
+                                <th>Data</th>
+                                <th>Cliente</th>
+                                <th>Perfume</th>
+                                <th>Lote</th>
+                                <th>Preço Total</th>
+                                <th>Valor Pago</th>
+                                <th>Em Dívida</th>
+                                <th>Margem</th>
+                                <th>Estado</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="salesTableBody"></tbody>
+
+                    </table>
+
+                    <div id="emptyState" class="empty-state">
+                        <i class="fa-solid fa-receipt"></i>
+                        <h4>Nenhuma venda registada</h4>
+                        <p>As tuas vendas aparecerão aqui.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span>NEXA © <span id="footerYear"></span></span>
+            <span>Executive Management System · Luanda, Angola</span>
+            <span><i class="fa-solid fa-lock"></i> Acesso interno</span>
+        </footer>
+
+    </div>
+
+
+    <!-- MODAL DE NOVA VENDA -->
+    <div class="modal-overlay" id="saleModal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <span class="section-label">NOVA OPERAÇÃO</span>
+                    <h3>Registar Venda</h3>
+                    <p>Preenche os dados da transação.</p>
+                </div>
+
+                <button class="close-modal" id="closeSaleModal" type="button">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="saleForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+                        <label for="clientName">Nome do Cliente</label>
+
+                        <input
+                            type="text"
+                            id="clientName"
+                            placeholder="Nome completo"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group full-width">
+                        <label for="perfumeName">Perfume</label>
+
+                        <select id="perfumeName" required>
+                            <option value="">Selecionar perfume</option>
+                        </select>
+                        <small id="stockHint" class="field-hint"></small>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="saleLot">Lote</label>
+
+                        <select id="saleLot" required disabled>
+                            <option value="">Seleciona primeiro um perfume</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="saleDate">Data da Venda</label>
+
+                        <input type="date" id="saleDate" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="salePrice">Preço Total (Kz)</label>
+
+                        <input
+                            type="number"
+                            id="salePrice"
+                            min="1"
+                            step="1"
+                            placeholder="Ex.: 60000"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="saleCost">Custo do Produto (Kz)</label>
+
+                        <input
+                            type="number"
+                            id="saleCost"
+                            min="0"
+                            step="1"
+                            placeholder="Custo de aquisição"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="salePaid">Valor Pago (Kz)</label>
+
+                        <input
+                            type="number"
+                            id="salePaid"
+                            min="0"
+                            step="1"
+                            placeholder="Ex.: 30000"
+                            value="0"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="paymentMethod">Forma de Pagamento</label>
+
+                        <select id="paymentMethod" required>
+                            <option value="">Selecionar método</option>
+                            <option value="Express">Express</option>
+                            <option value="IBAN">IBAN</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="form-error" id="formError" role="alert"></div>
+
+
+                <div class="modal-actions">
+
+                    <button type="button" class="btn btn-outline" id="cancelSale">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i>
+                        Guardar Venda
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICAÇÕES -->
+    <div class="toast" id="toast"></div>
+
+</body>
+</html>
